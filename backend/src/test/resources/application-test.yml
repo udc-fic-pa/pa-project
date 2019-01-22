@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: @testDataSource.url@
+    username: @testDataSource.user@
+    password: @testDataSource.password@
+  jpa:
+    hibernate:
+      ddl-auto: none
+ 

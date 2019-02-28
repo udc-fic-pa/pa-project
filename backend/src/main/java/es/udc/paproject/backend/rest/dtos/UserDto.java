@@ -1,5 +1,6 @@
 package es.udc.paproject.backend.rest.dtos;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -80,6 +81,7 @@ public class UserDto {
 
 	@NotNull(groups={AllValidations.class, UpdateValidations.class})
 	@Size(min=1, max=60, groups={AllValidations.class, UpdateValidations.class})
+	@Email(groups={AllValidations.class, UpdateValidations.class})
 	public String getEmail() {
 		return email;
 	}

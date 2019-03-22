@@ -23,13 +23,15 @@ class App extends React.Component {
     render() {
 
         return (
-            <Router>
-                <div>
-                    <Header/>
-                    <Body/>
-                    <Footer/>
-                </div>
-            </Router>
+            <div>
+                <Router>
+                    <div>
+                        <Header/>
+                        <Body/>
+                    </div>
+                </Router>
+                <Footer/>
+            </div>
         );
 
     }

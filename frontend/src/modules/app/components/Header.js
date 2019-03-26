@@ -66,7 +66,7 @@ const Header = ({user}) => (
 
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
     user: users.selectors.getUser(state)
 });
 

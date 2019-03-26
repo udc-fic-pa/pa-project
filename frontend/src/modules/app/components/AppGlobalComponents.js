@@ -15,7 +15,7 @@ const AppGlobalComponents = (props) => (
 
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
     error: selectors.getError(state),
     loading: selectors.isLoading(state),
 });

@@ -5,7 +5,7 @@ import {FormattedMessage} from 'react-intl';
 
 import users from '../../users';
 
-const Header = ({user}) => (
+const Header = ({userName}) => (
 
     <nav className="navbar navbar-expand-lg navbar-light bg-light border">
         <Link className="navbar-brand" to="/">PA Project</Link>
@@ -21,7 +21,7 @@ const Header = ({user}) => (
             <ul className="navbar-nav mr-auto">
             </ul>
             
-            {user ? 
+            {userName ? 
 
             <ul className="navbar-nav">
                
@@ -30,7 +30,7 @@ const Header = ({user}) => (
                     <a className="dropdown-toggle nav-link" 
                         data-toggle="dropdown">
                         <span className="fas fa-user"></span>&nbsp;
-                        {user.userName}
+                        {userName}
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
                         <Link className="dropdown-item" to="/users/update-profile">
@@ -67,7 +67,7 @@ const Header = ({user}) => (
 );
 
 const mapStateToProps = state => ({
-    user: users.selectors.getUser(state)
+    userName: users.selectors.getUserName(state)
 });
 
 export default connect(mapStateToProps)(Header);

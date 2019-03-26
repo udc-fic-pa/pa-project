@@ -7,18 +7,18 @@ import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users';
 import users from '../../users';
 
-const Body = ({user}) => (
+const Body = ({loggedIn}) => (
 
     <div className="container">
         <br/>
         <Route path="/" component={AppGlobalComponents}/>
         <Switch>
             <Route exact path="/" component={Home}/>
-            {user && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
-            {user && <Route exact path="/users/change-password" component={ChangePassword}/>}
-            {user && <Route exact path="/users/logout" component={Logout}/>}
-            {!user && <Route exact path="/users/login" component={Login}/>}
-            {!user && <Route exact path="/users/signup" component={SignUp}/>}
+            {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
+            {loggedIn && <Route exact path="/users/change-password" component={ChangePassword}/>}
+            {loggedIn && <Route exact path="/users/logout" component={Logout}/>}
+            {!loggedIn && <Route exact path="/users/login" component={Login}/>}
+            {!loggedIn && <Route exact path="/users/signup" component={SignUp}/>}
             <Route component={Home}/>
         </Switch>
     </div>
@@ -26,7 +26,7 @@ const Body = ({user}) => (
 );
 
 const mapStateToProps = state => ({
-    user: users.selectors.getUser(state)
+    loggedIn: users.selectors.isLoggedIn(state)
 });
 
 /*

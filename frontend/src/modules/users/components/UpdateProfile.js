@@ -74,7 +74,7 @@ class UpdateProfile extends React.Component {
 
         return (
             <div>
-                <Errors errors={this.state.backendErrors} handleClose={() => this.handleErrorsClose()}/>
+                <Errors errors={this.state.backendErrors} onClose={() => this.handleErrorsClose()}/>
                 <div className="card bg-light border-dark">
                     <h5 className="card-header">
                         <FormattedMessage id="project.users.UpdateProfile.title"/>

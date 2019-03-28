@@ -10,9 +10,7 @@ const errorMapStateToProps = state => ({
 });
 
 const errorMapDispatchToProps = dispatch => ({
-    handleClose() {
-        dispatch(actions.error(null))
-    }
+    onClose: () =>dispatch(actions.error(null))
 });
 
 const ConnectedErrorDialog = 

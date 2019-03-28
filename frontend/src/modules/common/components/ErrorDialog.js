@@ -4,7 +4,7 @@ import {injectIntl, FormattedMessage} from 'react-intl';
 
 import {NetworkError} from '../../../backend';
 
-const ErrorDialog = ({error, handleClose, intl}) => {
+const ErrorDialog = ({error, onClose, intl}) => {
 
     if (error == null) {
         return null;
@@ -31,7 +31,7 @@ const ErrorDialog = ({error, handleClose, intl}) => {
                     <div className="modal-footer">
                         <button type="button" className="btn btn-primary" 
                             data-dismiss="modal" 
-                            onClick={handleClose}>
+                            onClick={onClose}>
                             <FormattedMessage id="project.global.buttons.close"/>
                         </button>
                     </div>
@@ -45,7 +45,7 @@ const ErrorDialog = ({error, handleClose, intl}) => {
 
 ErrorDialog.propTypes = {
     error: PropTypes.object,
-    handleClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired
 }
 
 export default injectIntl(ErrorDialog);

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Success = ({message, handleClose}) => message && (
+const Success = ({message, onClose}) => message && (
     <div className="alert alert-success alert-dismissible fade show" role="alert">
         {message}
         <button type="button" className="close" data-dismiss="alert" aria-label="Close" 
-            onClick={() => handleClose()}>
+            onClick={() => onClose()}>
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -13,7 +13,7 @@ const Success = ({message, handleClose}) => message && (
 
 Success.propTypes = {
     message: PropTypes.string,
-    handleClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired
 };
 
 export default Success;

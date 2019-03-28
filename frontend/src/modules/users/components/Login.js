@@ -82,7 +82,7 @@ class Login extends React.Component {
                         <FormattedMessage id="project.users.SignUp.title"/>
                     </Link>
                 </p>
-                <Errors errors={this.state.backendErrors} handleClose={() => this.handleErrorsClose()}/>
+                <Errors errors={this.state.backendErrors} onClose={() => this.handleErrorsClose()}/>
                 <div className="card bg-light border-dark">
                     <h5 className="card-header">
                         <FormattedMessage id="project.users.Login.title"/>

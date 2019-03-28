@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {injectIntl} from 'react-intl';
 
-const Errors = ({errors, handleClose, intl}) => {
+const Errors = ({errors, onClose, intl}) => {
 
     if (!errors) {
         return null;
@@ -39,7 +39,7 @@ const Errors = ({errors, handleClose, intl}) => {
             }
 
             <button type="button" className="close" data-dismiss="alert" aria-label="Close" 
-                onClick={() => handleClose()}>
+                onClick={() => onClose()}>
                 <span aria-hidden="true">&times;</span>
             </button>
 
@@ -51,7 +51,7 @@ const Errors = ({errors, handleClose, intl}) => {
 
 Errors.propTypes = {
     errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    handleClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired
 };
 
 export default injectIntl(Errors);

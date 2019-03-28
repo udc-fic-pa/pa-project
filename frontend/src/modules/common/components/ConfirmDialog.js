@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
-const ConfirmDialog = ({id, icon, headerTitle, bodyTitle, handleConfirm}) => (
+const ConfirmDialog = ({id, icon, headerTitle, bodyTitle, onConfirm}) => (
 
     <span>
         <button type="button" className="btn btn-link btn-sm" 
@@ -25,7 +25,7 @@ const ConfirmDialog = ({id, icon, headerTitle, bodyTitle, handleConfirm}) => (
                         </button>
                         <button type="button" className="btn btn-secondary" 
                             data-dismiss="modal" 
-                            onClick={handleConfirm}>
+                            onClick={onConfirm}>
                             <FormattedMessage id="project.global.buttons.ok"/>
                         </button>
                     </div>
@@ -42,7 +42,7 @@ ConfirmDialog.propTypes = {
     icon: PropTypes.string.isRequired,
     headerTitle: PropTypes.string.isRequired,
     bodyTitle: PropTypes.string.isRequired,
-    handleConfirm: PropTypes.func.isRequired
+    onConfirm: PropTypes.func.isRequired
 }
 
 export default ConfirmDialog;

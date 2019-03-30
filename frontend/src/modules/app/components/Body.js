@@ -11,7 +11,7 @@ const Body = ({loggedIn}) => (
 
     <div className="container">
         <br/>
-        <Route path="/" component={AppGlobalComponents}/>
+        <AppGlobalComponents/>
         <Switch>
             <Route exact path="/" component={Home}/>
             {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}

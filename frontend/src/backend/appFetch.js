@@ -92,7 +92,7 @@ export const getServiceToken = () => sessionStorage.getItem(SERVICE_TOKEN_NAME);
 export const removeServiceToken = () => 
     sessionStorage.removeItem(SERVICE_TOKEN_NAME);
 
-export const config = (method, body=null) => {
+export const config = (method, body) => {
 
     const config = {};
 
@@ -123,7 +123,7 @@ export const config = (method, body=null) => {
 
 }
 
-export const appFetch = (url, options, onSuccess, onErrors) =>
-    fetch(`${BACKEND_URL}${url}`, options)
+export const appFetch = (path, options, onSuccess, onErrors) =>
+    fetch(`${BACKEND_URL}${path}`, options)
         .then(response => handleResponse(response, onSuccess, onErrors))
         .catch(networkErrorCallback);

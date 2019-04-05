@@ -56,7 +56,7 @@ class Login extends React.Component {
 
         this.props.dispatch(actions.login(
             this.state.userName.trim(),
-            this.state.password.trim(),
+            this.state.password,
             () => this.props.history.push('/'),
             errors => this.setBackendErrors(errors),
             reauthenticationCallback(this.props.dispatch, this.props.history,

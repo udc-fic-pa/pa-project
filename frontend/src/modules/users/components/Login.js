@@ -41,13 +41,11 @@ class Login extends React.Component {
 
         event.preventDefault();
 
-        const form = $('#login-form');
-
-        if (form.get(0).checkValidity()) {
+        if (this.form.checkValidity()) {
             this.login();
         } else {
             this.setBackendErrors(null);
-            form.get(0).classList.add('was-validated');
+            this.form.classList.add('was-validated');
         }
 
     }
@@ -88,7 +86,9 @@ class Login extends React.Component {
                         <FormattedMessage id="project.users.Login.title"/>
                     </h5>
                     <div className="card-body">
-                        <form id="login-form" className="needs-validation" noValidate onSubmit={(e) => this.handleSubmit(e)}>
+                        <form ref={node => this.form = node} 
+                            className="needs-validation" noValidate 
+                            onSubmit={(e) => this.handleSubmit(e)}>
                             <div className="form-group row">
                                 <label htmlFor="userName" className="col-md-3 col-form-label">
                                     <FormattedMessage id="project.global.fields.userName"/>

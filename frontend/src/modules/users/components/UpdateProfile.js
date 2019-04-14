@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import $ from 'jquery';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -39,13 +38,11 @@ class UpdateProfile extends React.Component {
 
         event.preventDefault();
 
-        const form = $('#update-profile-form');
-
-        if (form.get(0).checkValidity()) {
+        if (this.form.checkValidity()) {
             this.updateProfile();
         } else {
             this.setBackendErrors(null);
-            form.get(0).classList.add('was-validated');
+            this.form.classList.add('was-validated');
         }
 
     }
@@ -80,7 +77,8 @@ class UpdateProfile extends React.Component {
                         <FormattedMessage id="project.users.UpdateProfile.title"/>
                     </h5>
                     <div className="card-body">
-                        <form id="update-profile-form" className="needs-validation" noValidate onSubmit={(e) => this.handleSubmit(e)}>
+                        <form ref={node => this.form = node} 
+                            className="needs-validation" noValidate onSubmit={(e) => this.handleSubmit(e)}>
                             <div className="form-group row">
                                 <label htmlFor="firstName" className="col-md-3 col-form-label">
                                     <FormattedMessage id="project.global.fields.firstName"/>

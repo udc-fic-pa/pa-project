@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import $ from 'jquery';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -37,8 +36,7 @@ class SignUp extends React.Component {
 
     handleConfirmPasswordChange(event) {
 
-        $('#confirmPassword').get(0).setCustomValidity('');
-
+        this.confirmPasswordInput.setCustomValidity('');
         this.setState({confirmPassword: event.target.value,
             passwordsDoNotMatch: false});
     
@@ -60,13 +58,11 @@ class SignUp extends React.Component {
 
         event.preventDefault();
 
-        const form = $('#signup-form').get(0);
-
-        if (form.checkValidity() && this.checkConfirmPassword()) {
+        if (this.form.checkValidity() && this.checkConfirmPassword()) {
             this.signUp();
         } else {
             this.setBackendErrors(null);
-            form.classList.add('was-validated');
+            this.form.classList.add('was-validated');
         }
 
     }
@@ -75,7 +71,7 @@ class SignUp extends React.Component {
 
         if (this.state.password !== this.state.confirmPassword) {
 
-            $('#confirmPassword').get(0).setCustomValidity('error');
+            this.confirmPasswordInput.setCustomValidity('error');
             this.setState({passwordsDoNotMatch: true});
 
             return false;
@@ -118,7 +114,9 @@ class SignUp extends React.Component {
                         <FormattedMessage id="project.users.SignUp.title"/>
                     </h5>
                     <div className="card-body">
-                        <form id="signup-form" className="needs-validation" noValidate onSubmit={(e) => this.handleSubmit(e)}>
+                        <form ref={node => this.form = node}
+                            className="needs-validation" noValidate 
+                            onSubmit={(e) => this.handleSubmit(e)}>
                             <div className="form-group row">
                                 <label htmlFor="userName" className="col-md-3 col-form-label">
                                     <FormattedMessage id="project.global.fields.userName"/>
@@ -153,7 +151,8 @@ class SignUp extends React.Component {
                                     <FormattedMessage id="project.users.SignUp.fields.confirmPassword"/>
                                 </label>
                                 <div className="col-md-4">
-                                    <input type="password" id="confirmPassword" className="form-control"
+                                    <input ref={node => this.confirmPasswordInput = node}
+                                        type="password" id="confirmPassword" className="form-control"
                                         value={this.state.confirmPassword}
                                         onChange={(e) => this.handleConfirmPasswordChange(e)}
                                         required/>
@@ -161,7 +160,6 @@ class SignUp extends React.Component {
                                         {this.state.passwordsDoNotMatch ?
                                             <FormattedMessage id='project.global.validator.passwordsDoNotMatch'/> :
                                             <FormattedMessage id='project.global.validator.required'/>}
-                                        
                                     </div>
                                 </div>
                             </div>

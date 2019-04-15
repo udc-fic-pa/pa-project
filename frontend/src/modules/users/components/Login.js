@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
-import $ from 'jquery';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -13,9 +12,8 @@ const initialState = {
     backendErrors: null
 };
 
-const reauthenticationCallback = (dispatch, history, loginUrl) => () => {
-    $('.modal').modal('hide');
-    history.push(loginUrl);
+const reauthenticationCallback = (dispatch, history) => () => {
+    history.push('/users/login');
     dispatch(actions.logout());
 }
 
@@ -57,8 +55,7 @@ class Login extends React.Component {
             this.state.password,
             () => this.props.history.push('/'),
             errors => this.setBackendErrors(errors),
-            reauthenticationCallback(this.props.dispatch, this.props.history,
-                this.props.match.url)
+            reauthenticationCallback(this.props.dispatch, this.props.history)
         ));
         
     }

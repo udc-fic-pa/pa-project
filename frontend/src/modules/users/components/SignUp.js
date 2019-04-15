@@ -16,6 +16,11 @@ const initialState = {
     passwordsDoNotMatch: false
 };
 
+const reauthenticationCallback = (dispatch, history) => () => {
+    history.push('/users/login');
+    dispatch(actions.logout());
+}
+
 class SignUp extends React.Component {
 
     constructor(props) {
@@ -91,7 +96,8 @@ class SignUp extends React.Component {
             lastName: this.state.lastName.trim(),
             email: this.state.email.trim()},
             () => this.props.history.push('/'),
-            errors => this.setBackendErrors(errors)
+            errors => this.setBackendErrors(errors),
+            reauthenticationCallback(this.props.dispatch, this.props.history)
         ));
         
     }

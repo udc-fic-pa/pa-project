@@ -6,13 +6,14 @@ const signUpCompleted = authenticatedUser => ({
     authenticatedUser
 });
 
-export const signUp = (user, onSuccess, onErrors) => dispatch =>
+export const signUp = (user, onSuccess, onErrors, reauthenticationCallback) => dispatch =>
     backend.userService.signUp(user,
         authenticatedUser => {
             dispatch(signUpCompleted(authenticatedUser));
             onSuccess();
         },
-        onErrors);
+        onErrors,
+        reauthenticationCallback);
 
 const loginCompleted = authenticatedUser => ({
     type: actionTypes.LOGIN_COMPLETED,

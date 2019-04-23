@@ -9,7 +9,9 @@ export default {
 
     'project.global.buttons.cancel': 'Cancelar',
     'project.global.buttons.close': 'Cerrar',
+    'project.global.buttons.next': 'Siguiente',
     'project.global.buttons.ok': 'OK',
+    'project.global.buttons.back': 'Anterior',
     'project.global.buttons.save': 'Guardar',
     'project.global.exceptions.NetworkError': 'Fallo de comunicación',
     'project.global.fields.date': 'Fecha',

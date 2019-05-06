@@ -16,6 +16,7 @@ import backend from './backend';
 import {NetworkError} from './backend';
 import app from './modules/app';
 import {initReactIntl} from './i18n';
+import './styles.css';
 
 /* Configure store. */
 const store = configureStore();

@@ -8,7 +8,7 @@ import 'bootstrap';
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './serviceWorker';
 import './polyfills';
 import configureStore from './store';
 import {App} from './modules/app';
@@ -36,4 +36,4 @@ ReactDOM.render(
     </Provider>, 
     document.getElementById('root'));
 
-registerServiceWorker();
+serviceWorker.register();

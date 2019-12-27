@@ -27,7 +27,7 @@ const Header = ({userName}) => (
                
                 <li className="nav-item dropdown">
 
-                    <a className="dropdown-toggle nav-link" 
+                    <a className="dropdown-toggle nav-link" href="/"
                         data-toggle="dropdown">
                         <span className="fas fa-user"></span>&nbsp;
                         {userName}

@@ -116,7 +116,7 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public UserDto updateProfile(@RequestAttribute Long userId, @PathVariable("id") Long id, 
+	public UserDto updateProfile(@RequestAttribute Long userId, @PathVariable Long id,
 		@Validated({UserDto.UpdateValidations.class}) @RequestBody UserDto userDto) 
 		throws InstanceNotFoundException, PermissionException {
 				

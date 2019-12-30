@@ -1,13 +1,9 @@
 package es.udc.paproject.backend.test.model.services;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
@@ -17,7 +13,8 @@ import es.udc.paproject.backend.model.exceptions.IncorrectLoginException;
 import es.udc.paproject.backend.model.exceptions.IncorrectPasswordException;
 import es.udc.paproject.backend.model.services.UserService;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
@@ -46,19 +43,19 @@ public class UserServiceTest {
 		
 	}
 	
-	@Test(expected = DuplicateInstanceException.class)
+	@Test
 	public void testSignUpDuplicatedUserName() throws DuplicateInstanceException {
 		
 		User user = createUser("user");
 		
 		userService.signUp(user);
-		userService.signUp(user);
+		assertThrows(DuplicateInstanceException.class, () -> userService.signUp(user));
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testloginFromNonExistentId() throws InstanceNotFoundException {		
-		userService.loginFromId(NON_EXISTENT_ID);
+	@Test
+	public void testLoginFromNonExistentId() {
+		assertThrows(InstanceNotFoundException.class, () -> userService.loginFromId(NON_EXISTENT_ID));
 	}
 	
 	@Test
@@ -75,20 +72,21 @@ public class UserServiceTest {
 		
 	}
 	
-	@Test(expected = IncorrectLoginException.class)
-	public void testLoginWithIncorrectPassword() throws DuplicateInstanceException, IncorrectLoginException {
+	@Test
+	public void testLoginWithIncorrectPassword() throws DuplicateInstanceException {
 		
 		User user = createUser("user");
 		String clearPassword = user.getPassword();
 		
 		userService.signUp(user);
-		userService.login(user.getUserName(), 'X' + clearPassword);
+		assertThrows(IncorrectLoginException.class, () ->
+			userService.login(user.getUserName(), 'X' + clearPassword));
 		
 	}
 	
-	@Test(expected = IncorrectLoginException.class)
-	public void testLoginWithNonExistentUserName() throws IncorrectLoginException {
-		userService.login("X", "Y");
+	@Test
+	public void testLoginWithNonExistentUserName() {
+		assertThrows(IncorrectLoginException.class, () -> userService.login("X", "Y"));
 	}
 	
 	@Test
@@ -111,9 +109,10 @@ public class UserServiceTest {
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testUpdateProfileWithNonExistentId() throws InstanceNotFoundException {		
-		userService.updateProfile(NON_EXISTENT_ID, "X", "X", "X");
+	@Test
+	public void testUpdateProfileWithNonExistentId() {
+		assertThrows(InstanceNotFoundException.class, () ->
+			userService.updateProfile(NON_EXISTENT_ID, "X", "X", "X"));
 	}
 	
 	@Test
@@ -130,21 +129,22 @@ public class UserServiceTest {
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testChangePasswordWithNonExistentId() throws InstanceNotFoundException, IncorrectPasswordException {
-		userService.changePassword(NON_EXISTENT_ID, "X", "Y");
+	@Test
+	public void testChangePasswordWithNonExistentId() {
+		assertThrows(InstanceNotFoundException.class, () ->
+			userService.changePassword(NON_EXISTENT_ID, "X", "Y"));
 	}
 	
-	@Test(expected = IncorrectPasswordException.class)
-	public void testChangePasswordWithIncorrectPassword() throws DuplicateInstanceException, InstanceNotFoundException,
-		IncorrectPasswordException {
+	@Test
+	public void testChangePasswordWithIncorrectPassword() throws DuplicateInstanceException {
 		
 		User user = createUser("user");
 		String oldPassword = user.getPassword();
 		String newPassword = 'X' + oldPassword;
 		
 		userService.signUp(user);
-		userService.changePassword(user.getId(), 'Y' + oldPassword, newPassword);
+		assertThrows(IncorrectPasswordException.class, () ->
+			userService.changePassword(user.getId(), 'Y' + oldPassword, newPassword));
 		
 	}
 

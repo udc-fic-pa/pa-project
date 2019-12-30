@@ -1,4 +1,4 @@
-package es.udc.paproject.backend.model.services;
+package es.udc.paproject.backend.model.exceptions;
 
 @SuppressWarnings("serial")
 public class IncorrectLoginException extends Exception {

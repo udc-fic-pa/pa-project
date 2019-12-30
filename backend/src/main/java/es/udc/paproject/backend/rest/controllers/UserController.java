@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import es.udc.paproject.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.paproject.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.entities.User;
-import es.udc.paproject.backend.model.services.IncorrectLoginException;
-import es.udc.paproject.backend.model.services.IncorrectPasswordException;
-import es.udc.paproject.backend.model.services.PermissionException;
+import es.udc.paproject.backend.model.exceptions.IncorrectLoginException;
+import es.udc.paproject.backend.model.exceptions.IncorrectPasswordException;
+import es.udc.paproject.backend.model.exceptions.PermissionException;
 import es.udc.paproject.backend.model.services.UserService;
 import es.udc.paproject.backend.rest.common.ErrorsDto;
 import es.udc.paproject.backend.rest.common.JwtGenerator;

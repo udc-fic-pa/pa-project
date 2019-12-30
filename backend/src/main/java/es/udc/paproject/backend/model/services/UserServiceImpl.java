@@ -2,13 +2,15 @@ package es.udc.paproject.backend.model.services;
 
 import java.util.Optional;
 
+import es.udc.paproject.backend.model.exceptions.IncorrectLoginException;
+import es.udc.paproject.backend.model.exceptions.IncorrectPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.paproject.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.paproject.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.entities.User;
 import es.udc.paproject.backend.model.entities.UserDao;
 

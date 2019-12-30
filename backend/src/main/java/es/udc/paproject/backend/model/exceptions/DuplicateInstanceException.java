@@ -1,4 +1,4 @@
-package es.udc.paproject.backend.model.common.exceptions;
+package es.udc.paproject.backend.model.exceptions;
 
 @SuppressWarnings("serial")
 public class DuplicateInstanceException extends InstanceException {

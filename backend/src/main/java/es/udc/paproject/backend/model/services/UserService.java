@@ -1,7 +1,9 @@
 package es.udc.paproject.backend.model.services;
 
-import es.udc.paproject.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.paproject.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.paproject.backend.model.exceptions.IncorrectLoginException;
+import es.udc.paproject.backend.model.exceptions.IncorrectPasswordException;
+import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.entities.User;
 
 public interface UserService {

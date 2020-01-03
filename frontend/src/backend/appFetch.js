@@ -1,6 +1,5 @@
 import NetworkError from './NetworkError';
 
-const BACKEND_URL = 'http://localhost:8080';
 const SERVICE_TOKEN_NAME = 'serviceToken';
 
 let networkErrorCallback;
@@ -124,6 +123,6 @@ export const config = (method, body) => {
 }
 
 export const appFetch = (path, options, onSuccess, onErrors) =>
-    fetch(`${BACKEND_URL}${path}`, options)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}${path}`, options)
         .then(response => handleResponse(response, onSuccess, onErrors))
         .catch(networkErrorCallback);

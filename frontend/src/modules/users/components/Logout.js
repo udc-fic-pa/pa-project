@@ -1,20 +1,16 @@
-import React from 'react';
+import {useEffect} from 'react';
 import {connect} from 'react-redux';
 
 import users from '../../users';
 
-class Logout extends React.Component {
+const Logout = ({dispatch, history}) => {
 
-    componentDidMount() {
+    useEffect(() => {
+        dispatch(users.actions.logout());
+        history.push('/');
+    });
 
-        this.props.dispatch(users.actions.logout());
-        this.props.history.push('/');
-
-    }
-
-    render() {
-        return null;
-    }
+    return null;
 
 }
 

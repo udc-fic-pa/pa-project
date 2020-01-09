@@ -13,7 +13,7 @@ const Login = ({dispatch, history}) => {
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
 
         event.preventDefault();
 

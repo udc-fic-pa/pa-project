@@ -16,17 +16,21 @@ const ChangePassword = ({id, changePassword, history}) => {
     let form;
     let confirmNewPasswordInput;
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
 
         event.preventDefault();
 
         if (form.checkValidity() && checkConfirmNewPassword()) {
+
             changePassword(id, oldPassword, newPassword,
                 () => history.push('/'),
                 errors => setBackendErrors(errors));
+
         } else {
+
             setBackendErrors(null);
             form.classList.add('was-validated');
+            
         }
 
     }
@@ -46,7 +50,7 @@ const ChangePassword = ({id, changePassword, history}) => {
 
     }
 
-    const handleConfirmNewPasswordChange = (event) => {
+    const handleConfirmNewPasswordChange = event => {
 
         confirmNewPasswordInput.setCustomValidity('');
         setConfirmNewPassword(event.target.value);
@@ -63,7 +67,7 @@ const ChangePassword = ({id, changePassword, history}) => {
                 </h5>
                 <div className="card-body">
                     <form ref={node => form = node} 
-                        className="needs-validation" noValidate onSubmit={(e) => handleSubmit(e)}>
+                        className="needs-validation" noValidate onSubmit={e => handleSubmit(e)}>
                         <div className="form-group row">
                             <label htmlFor="oldPassword" className="col-md-3 col-form-label">
                                 <FormattedMessage id="project.users.ChangePassword.fields.oldPassword"/>

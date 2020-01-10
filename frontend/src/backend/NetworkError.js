@@ -1,9 +1,7 @@
-class NetworkError {
+class NetworkError extends Error {
 
     constructor() {
-
-        this.messsage = "Network error";
-
+        super("Network error");
     }
 
 }

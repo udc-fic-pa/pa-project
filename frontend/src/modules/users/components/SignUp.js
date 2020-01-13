@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 
-const SignUp = ({dispatch, history}) => {
+const SignUp = ({history}) => {
 
+    const dispatch = useDispatch();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,10 +24,27 @@ const SignUp = ({dispatch, history}) => {
         event.preventDefault();
 
         if (form.checkValidity() && checkConfirmPassword()) {
-            signUp();
+            
+            dispatch(actions.signUp(
+                {userName: userName.trim(),
+                password: password,
+                firstName: firstName.trim(),
+                lastName: lastName.trim(),
+                email: email.trim()},
+                () => history.push('/'),
+                errors => setBackendErrors(errors),
+                () => {
+                    history.push('/users/login');
+                    dispatch(actions.logout());
+                }
+            ));
+            
+
         } else {
+
             setBackendErrors(null);
             form.classList.add('was-validated');
+
         }
 
     }
@@ -44,24 +62,6 @@ const SignUp = ({dispatch, history}) => {
             return true;
         }
 
-    }
-
-    const signUp = () => {
-
-        dispatch(actions.signUp(
-            {userName: userName.trim(),
-            password: password,
-            firstName: firstName.trim(),
-            lastName: lastName.trim(),
-            email: email.trim()},
-            () => history.push('/'),
-            errors => setBackendErrors(errors),
-            () => {
-                history.push('/users/login');
-                dispatch(actions.logout());
-            }
-        ));
-        
     }
 
     const handleConfirmPasswordChange = value => {
@@ -186,4 +186,4 @@ const SignUp = ({dispatch, history}) => {
 
 }
 
-export default connect()(SignUp);
+export default SignUp;

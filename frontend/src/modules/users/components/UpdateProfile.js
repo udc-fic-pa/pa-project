@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const UpdateProfile = ({user, updateProfile, history}) => {
+const UpdateProfile = ({history}) => {
 
+    const user = useSelector(selectors.getUser);
+    const dispatch = useDispatch();
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail]  = useState(user.email);
@@ -20,13 +22,13 @@ const UpdateProfile = ({user, updateProfile, history}) => {
 
         if (form.checkValidity()) {
             
-            updateProfile(
+            dispatch(actions.updateProfile(
                 {id: user.id,
                 firstName: firstName.trim(),
                 lastName: lastName.trim(),
                 email: email.trim()},
                 () => history.push('/'),
-                errors => setBackendErrors(errors));
+                errors => setBackendErrors(errors)));
 
         } else {
 
@@ -105,12 +107,4 @@ const UpdateProfile = ({user, updateProfile, history}) => {
 
 }
 
-const mapStateToProps = (state) => ({
-    user: selectors.getUser(state)
-});
-
-const mapDispatchToProps = {
-    updateProfile: actions.updateProfile
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile);
+export default UpdateProfile;

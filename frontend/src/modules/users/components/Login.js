@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 
-const Login = ({dispatch, history}) => {
+const Login = ({history}) => {
 
+    const dispatch = useDispatch();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);
@@ -18,27 +19,23 @@ const Login = ({dispatch, history}) => {
         event.preventDefault();
 
         if (form.checkValidity()) {
-            login();
+
+            dispatch(actions.login(
+                userName.trim(),
+                password,
+                () => history.push('/'),
+                errors => setBackendErrors(errors),
+                () => {
+                    history.push('/users/login');
+                    dispatch(actions.logout());
+                }
+            ));
+
         } else {
             setBackendErrors(null);
             form.classList.add('was-validated');
         }
 
-    }
-
-    const login = () => {
-
-        dispatch(actions.login(
-            userName.trim(),
-            password,
-            () => history.push('/'),
-            errors => setBackendErrors(errors),
-            () => {
-                history.push('/users/login');
-                dispatch(actions.logout());
-            }
-        ));
-        
     }
 
     return (
@@ -101,4 +98,4 @@ const Login = ({dispatch, history}) => {
 
 }
 
-export default connect()(Login);
+export default Login;

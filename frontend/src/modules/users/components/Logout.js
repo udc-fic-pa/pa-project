@@ -1,9 +1,11 @@
 import {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import users from '../../users';
 
-const Logout = ({dispatch, history}) => {
+const Logout = ({history}) => {
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(users.actions.logout());
@@ -14,4 +16,4 @@ const Logout = ({dispatch, history}) => {
 
 }
 
-export default connect()(Logout);
+export default Logout;

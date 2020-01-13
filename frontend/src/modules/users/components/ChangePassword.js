@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const ChangePassword = ({id, changePassword, history}) => {
+const ChangePassword = ({history}) => {
 
+    const user = useSelector(selectors.getUser);
+    const dispatch = useDispatch();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -22,9 +24,9 @@ const ChangePassword = ({id, changePassword, history}) => {
 
         if (form.checkValidity() && checkConfirmNewPassword()) {
 
-            changePassword(id, oldPassword, newPassword,
+            dispatch(actions.changePassword(user.id, oldPassword, newPassword,
                 () => history.push('/'),
-                errors => setBackendErrors(errors));
+                errors => setBackendErrors(errors)));
 
         } else {
 
@@ -130,12 +132,4 @@ const ChangePassword = ({id, changePassword, history}) => {
 
 }
 
-const mapStateToProps = (state) => ({
-    id: selectors.getUser(state).id
-});
-
-const mapDispatchToProps = {
-    changePassword: actions.changePassword
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);
+export default ChangePassword;

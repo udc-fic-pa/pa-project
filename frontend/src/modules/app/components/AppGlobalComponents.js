@@ -1,26 +1,27 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {ErrorDialog, Loader} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const errorMapStateToProps = state => ({
-    error: selectors.getError(state)
-});
+const ConnectedErrorDialog = () => {
 
-const errorMapDispatchToProps = dispatch => ({
-    onClose: () =>dispatch(actions.error(null))
-});
+    const error = useSelector(selectors.getError);
+    const dispatch = useDispatch();
 
-const ConnectedErrorDialog = 
-    connect(errorMapStateToProps, errorMapDispatchToProps)(ErrorDialog);
+    return <ErrorDialog error={error} 
+                onClose={() => dispatch(actions.error(null))}/>
 
-const loadingMapStateToProps = state => ({
-    loading: selectors.isLoading(state)
-});
+};
 
-const ConnectedLoader = connect(loadingMapStateToProps)(Loader);
+const ConnectedLoader = () => {
+
+    const loading = useSelector(selectors.isLoading);
+
+    return <Loader loading={loading}/>
+
+};
 
 const AppGlobalComponents = () => (
 

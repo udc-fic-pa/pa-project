@@ -2,13 +2,15 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
+import {useHistory} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 
-const Login = ({history}) => {
+const Login = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);

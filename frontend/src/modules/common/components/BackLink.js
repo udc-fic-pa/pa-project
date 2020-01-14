@@ -1,16 +1,26 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
-const BackLink = ({history}) => history.length > 2 && (
+const BackLink = () => {
 
-    <button type="button" className="btn btn-link" 
-        onClick={() => history.goBack()}>
+    const history = useHistory();
 
-        <FormattedMessage id='project.global.buttons.back'/>
+    if (history.length <= 2) {
+        return null;
+    } 
+    
+    return (
 
-    </button>
+        <button type="button" className="btn btn-link" 
+            onClick={() => history.goBack()}>
 
-);
+            <FormattedMessage id='project.global.buttons.back'/>
 
-export default withRouter(BackLink);
+        </button>
+
+    );
+
+};
+
+export default BackLink;

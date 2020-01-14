@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
+import {useHistory} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const ChangePassword = ({history}) => {
+const ChangePassword = () => {
 
     const user = useSelector(selectors.getUser);
     const dispatch = useDispatch();
+    const history = useHistory();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');

@@ -17,13 +17,13 @@ const Body = () => {
             <br/>
             <AppGlobalComponents/>
             <Switch>
-                <Route exact path="/" component={Home}/>
-                {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
-                {loggedIn && <Route exact path="/users/change-password" component={ChangePassword}/>}
-                {loggedIn && <Route exact path="/users/logout" component={Logout}/>}
-                {!loggedIn && <Route exact path="/users/login" component={Login}/>}
-                {!loggedIn && <Route exact path="/users/signup" component={SignUp}/>}
-                <Route component={Home}/>
+                <Route exact path="/"><Home/></Route>
+                {loggedIn && <Route exact path="/users/update-profile"><UpdateProfile/></Route>}
+                {loggedIn && <Route exact path="/users/change-password"><ChangePassword/></Route>}
+                {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}
+                {!loggedIn && <Route exact path="/users/login"><Login/></Route>}
+                {!loggedIn && <Route exact path="/users/signup"><SignUp/></Route>}
+                <Route><Home/></Route>
             </Switch>
         </div>
 

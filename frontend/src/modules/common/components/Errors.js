@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {injectIntl} from 'react-intl';
+import {useIntl} from 'react-intl';
 
-const Errors = ({errors, onClose, intl}) => {
+const Errors = ({errors, onClose}) => {
+
+    const intl = useIntl();
 
     if (!errors) {
         return null;
@@ -54,4 +56,4 @@ Errors.propTypes = {
     onClose: PropTypes.func.isRequired
 };
 
-export default injectIntl(Errors);
+export default Errors;

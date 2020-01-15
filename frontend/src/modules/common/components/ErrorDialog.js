@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {injectIntl, FormattedMessage} from 'react-intl';
+import {useIntl, FormattedMessage} from 'react-intl';
 
 import {NetworkError} from '../../../backend';
 
-const ErrorDialog = ({error, onClose, intl}) => {
+const ErrorDialog = ({error, onClose}) => {
+
+    const intl = useIntl();
 
     if (error == null) {
         return null;
@@ -48,4 +50,4 @@ ErrorDialog.propTypes = {
     onClose: PropTypes.func.isRequired
 }
 
-export default injectIntl(ErrorDialog);
+export default ErrorDialog;

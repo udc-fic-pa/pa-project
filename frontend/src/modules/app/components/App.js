@@ -7,18 +7,14 @@ import Body from './Body';
 import Footer from './Footer';
 import users from '../../users';
 
-const reauthenticationCallback = dispatch => () => 
-    dispatch(users.actions.logout());
-
 const App = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
 
-        dispatch(
-            users.actions.tryLoginFromServiceToken(
-                reauthenticationCallback(dispatch)));
+        dispatch(users.actions.tryLoginFromServiceToken(
+            () => dispatch(users.actions.logout())));
     
     });
 

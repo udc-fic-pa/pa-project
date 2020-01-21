@@ -2,7 +2,8 @@
 
 ## Requirements
 
-- Node 8+.
+- Node 12.14.0+.
+- Yarn 1.21.1+.
 - Java SE 8+.
 - Maven 3+.
 - MySQL 8+.
@@ -30,6 +31,6 @@ mvn sql:execute (only first time to create tables)
 mvn spring-boot:run
 
 cd frontend
-npm install (only first time to download libraries)
-npm start
+yarn install (only first time to download libraries)
+yarn start
 ```

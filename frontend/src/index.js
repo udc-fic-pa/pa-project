@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
 import {Provider} from 'react-redux';
 import {IntlProvider} from 'react-intl';
 
@@ -9,7 +12,6 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 
 import * as serviceWorker from './serviceWorker';
-import './polyfills';
 import configureStore from './store';
 import {App} from './modules/app';
 import backend from './backend';

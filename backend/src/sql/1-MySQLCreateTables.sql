@@ -1,5 +1,3 @@
--- Indexes for primary keys have been explicitly created.
-
 DROP TABLE User;
 
 CREATE TABLE User (

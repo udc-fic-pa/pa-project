@@ -6,7 +6,7 @@ const BackLink = () => {
 
     const history = useHistory();
 
-    if (history.length <= 2) {
+    if (history.length <= 1) {
         return null;
     } 
     

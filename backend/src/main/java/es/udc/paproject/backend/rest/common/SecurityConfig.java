@@ -3,6 +3,7 @@ package es.udc.paproject.backend.rest.common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,10 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.addFilter(new JwtFilter(authenticationManager(), jwtGenerator))
 			.authorizeRequests()
-			.antMatchers("/users/signUp").permitAll()
-			.antMatchers("/users/login").permitAll()
-			.antMatchers("/users/loginFromServiceToken").permitAll()
-			.anyRequest().hasRole("USER");
+			.antMatchers(HttpMethod.POST, "/users/signUp").permitAll()
+			.antMatchers(HttpMethod.POST, "/users/login").permitAll()
+			.antMatchers(HttpMethod.POST, "/users/loginFromServiceToken").permitAll()
+			.antMatchers(HttpMethod.PUT, "/users/*").hasRole("USER")
+			.antMatchers(HttpMethod.POST, "/users/*/changePassword").hasRole("USER")
+			.anyRequest().denyAll();
 
 	}
 	

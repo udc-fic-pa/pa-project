@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 public class UserServiceTest {
 	
-	private final Long NON_EXISTENT_ID = new Long(-1);
+	private final Long NON_EXISTENT_ID = Long.valueOf(-1);
 	
 	@Autowired
 	private UserService userService;

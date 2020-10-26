@@ -8,8 +8,8 @@ import {IntlProvider} from 'react-intl';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
-import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
-import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import '@fortawesome/fontawesome-free/css/solid.css';
 
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store';

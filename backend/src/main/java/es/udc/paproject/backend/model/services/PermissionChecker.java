@@ -5,8 +5,8 @@ import es.udc.paproject.backend.model.entities.User;
 
 public interface PermissionChecker {
 	
-	public void checkUserExists(Long userId) throws InstanceNotFoundException;
+	void checkUserExists(Long userId) throws InstanceNotFoundException;
 	
-	public User checkUser(Long userId) throws InstanceNotFoundException;
+	User checkUser(Long userId) throws InstanceNotFoundException;
 	
 }

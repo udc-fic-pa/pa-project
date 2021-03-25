@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 export default {
 
     'project.app.Footer.text': 'PA Project - Area de Enxeñaría Telemática - Universidade da Coruña',

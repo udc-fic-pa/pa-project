@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.4.5</version>
     </parent>
     
     <properties>
@@ -48,7 +48,7 @@
                 <!-- JDBC driver properties -->
                 <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
                 <jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-                <jdbcDriver.version>8.0.20</jdbcDriver.version>
+                <jdbcDriver.version>8.0.24</jdbcDriver.version>
                 <jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
                 <!--  Data source properties -->

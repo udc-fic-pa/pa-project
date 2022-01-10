@@ -34,6 +34,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         
         <!-- Plugin versions -->
+        <surefireMavenPlugin.version>2.22.2</surefireMavenPlugin.version>
         <sqlPlugin.version>1.5</sqlPlugin.version>
         
     </properties>
@@ -119,6 +120,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefireMavenPlugin.version}</version>
+                <configuration>
+                    <forkCount>0</forkCount>
+                </configuration>
             </plugin>
 
             <!--

@@ -1,15 +1,5 @@
-# Backend build output.
-backend/target/
-
-# Frontend build output.
-frontend/build/
-frontend/node_modules/
-
-# Eclipse configuration.
-backend/.classpath
-backend/.project
-backend/.settings/
-
-# IntelliJ IDEA configuration.
+target/
+build/
+node_modules/
 .idea/
-pa-project-backend.iml
+*.iml

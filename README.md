@@ -2,10 +2,10 @@
 
 ## Requirements
 
-- Node 14.15.0+.
+- Node 14.
 - Java 11 (tested with AdoptOpenJDK 11).
-- Maven 3.6+.
-- MySQL 8+.
+- Maven 3.8+.
+- MySQL 8.
 
 ## Database creation
 

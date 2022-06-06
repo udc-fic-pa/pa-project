@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -11,7 +11,7 @@ const UpdateProfile = () => {
 
     const user = useSelector(selectors.getUser);
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail]  = useState(user.email);
@@ -29,7 +29,7 @@ const UpdateProfile = () => {
                 firstName: firstName.trim(),
                 lastName: lastName.trim(),
                 email: email.trim()},
-                () => history.push('/'),
+                () => navigate('/'),
                 errors => setBackendErrors(errors)));
 
         } else {

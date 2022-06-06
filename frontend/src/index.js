@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {IntlProvider} from 'react-intl';
 
@@ -32,7 +33,9 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <IntlProvider locale={locale} messages={messages}>
-                <App/>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
             </IntlProvider>
         </Provider>
     </React.StrictMode>);

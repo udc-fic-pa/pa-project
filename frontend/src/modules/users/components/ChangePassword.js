@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -11,7 +11,7 @@ const ChangePassword = () => {
 
     const user = useSelector(selectors.getUser);
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -27,7 +27,7 @@ const ChangePassword = () => {
         if (form.checkValidity() && checkConfirmNewPassword()) {
 
             dispatch(actions.changePassword(user.id, oldPassword, newPassword,
-                () => history.push('/'),
+                () => navigate('/'),
                 errors => setBackendErrors(errors)));
 
         } else {

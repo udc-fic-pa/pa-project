@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
 import AppGlobalComponents from './AppGlobalComponents';
 import Home from './Home';
@@ -15,15 +15,14 @@ const Body = () => {
         <div className="container">
             <br/>
             <AppGlobalComponents/>
-            <Switch>
-                <Route exact path="/"><Home/></Route>
-                {loggedIn && <Route exact path="/users/update-profile"><UpdateProfile/></Route>}
-                {loggedIn && <Route exact path="/users/change-password"><ChangePassword/></Route>}
-                {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}
-                {!loggedIn && <Route exact path="/users/login"><Login/></Route>}
-                {!loggedIn && <Route exact path="/users/signup"><SignUp/></Route>}
-                <Route><Home/></Route>
-            </Switch>
+            <Routes>
+                <Route path="/*" element={<Home/>}/>
+                {loggedIn && <Route path="/users/update-profile" element={<UpdateProfile/>}/>}
+                {loggedIn && <Route path="/users/change-password" element={<ChangePassword/>}/>}
+                {loggedIn && <Route path="/users/logout" element={<Logout/>}/>}
+                {!loggedIn && <Route path="/users/login" element={<Login/>}/>}
+                {!loggedIn && <Route path="/users/signup" element={<SignUp/>}/>}
+            </Routes>
         </div>
 
     );

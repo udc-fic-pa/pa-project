@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -9,7 +9,7 @@ import * as actions from '../actions';
 const SignUp = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,10 +33,10 @@ const SignUp = () => {
                 firstName: firstName.trim(),
                 lastName: lastName.trim(),
                 email: email.trim()},
-                () => history.push('/'),
+                () => navigate('/'),
                 errors => setBackendErrors(errors),
                 () => {
-                    history.push('/users/login');
+                    navigate('/users/login');
                     dispatch(actions.logout());
                 }
             ));

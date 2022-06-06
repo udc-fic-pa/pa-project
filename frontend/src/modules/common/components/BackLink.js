@@ -1,18 +1,14 @@
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 const BackLink = () => {
 
-    const history = useHistory();
-
-    if (history.length <= 1) {
-        return null;
-    } 
+    const navigate = useNavigate();
     
     return (
 
         <button type="button" className="btn btn-link" 
-            onClick={() => history.goBack()}>
+            onClick={() => navigate(-1)}>
 
             <FormattedMessage id='project.global.buttons.back'/>
 

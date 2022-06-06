@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {BrowserRouter as Router} from 'react-router-dom';
 
 import Header from './Header';
 import Body from './Body';
@@ -20,12 +19,8 @@ const App = () => {
 
     return (
         <div>
-            <Router>
-                <div>
-                    <Header/>
-                    <Body/>
-                </div>
-            </Router>
+            <Header/>
+            <Body/>
             <Footer/>
         </div>
     );

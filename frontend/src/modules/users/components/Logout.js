@@ -1,17 +1,17 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import users from '../../users';
 
 const Logout = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(users.actions.logout());
-        history.push('/');
+        navigate('/');
     });
 
     return null;

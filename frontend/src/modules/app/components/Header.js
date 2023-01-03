@@ -32,7 +32,7 @@ const Header = () => {
 
                         <a className="dropdown-toggle nav-link" href="/"
                             data-toggle="dropdown">
-                            <span className="fas fa-user"></span>&nbsp;
+                            <span className="fa-solid fa-user"></span>&nbsp;
                             {userName}
                         </a>
                         <div className="dropdown-menu dropdown-menu-right">

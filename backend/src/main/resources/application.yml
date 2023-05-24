@@ -8,13 +8,14 @@ spring:
     url: @dataSource.url@
     username: @dataSource.user@
     password: @dataSource.password@
-    max-active: 4
-    max-idle: 2
-    max-wait: 10000
-    remove-abandoned: true
-    remove-abandoned-timeout: 60
-    log-abandoned: true
-    validation-query: SELECT 1
+    dbcp2:
+      max-total: 4
+      max-idle: 2
+      max-wait-millis: 10000
+      remove-abandoned-on-borrow: true
+      remove-abandoned-timeout: 60
+      log-abandoned: true
+      validation-query: SELECT 1
   devtools:
     restart:
       trigger-file: reload
@@ -23,11 +24,11 @@ spring:
   jackson:
     default-property-inclusion: NON_NULL
   jpa:
+    properties:
+      hibernate:
+        format_sql: true
     hibernate:
       ddl-auto: none
-      show-sql: true
-      format-sql: true
-      use-sql-comments: true
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 project:

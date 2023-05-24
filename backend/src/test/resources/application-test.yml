@@ -3,5 +3,6 @@ spring:
     url: @testDataSource.url@
     username: @testDataSource.user@
     password: @testDataSource.password@
-    max-active: 1
-    max-idle: 1
+    dbcp2:
+      max-total: 1
+      max-idle: 1

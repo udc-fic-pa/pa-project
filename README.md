@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node 16.
+- Node 18.
 - Java 17 (tested with Eclipse Temurin).
 - Maven 3.8+.
 - MySQL 8.
@@ -31,5 +31,5 @@ mvn spring-boot:run
 
 cd frontend
 npm install (only first time to download libraries)
-npm start
+npm run dev
 ```

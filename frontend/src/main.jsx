@@ -19,7 +19,7 @@ import {initReactIntl} from './i18n';
 import './styles.css';
 
 /* Configure backend proxy. */
-backend.init(error => store.dispatch(app.actions.error(new NetworkError())));
+backend.init(() => store.dispatch(app.actions.error(new NetworkError())));
 
 /* Configure i18n. */
 const {locale, messages} = initReactIntl();

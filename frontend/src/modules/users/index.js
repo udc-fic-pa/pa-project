@@ -9,5 +9,4 @@ export {default as UpdateProfile} from './components/UpdateProfile';
 export {default as ChangePassword} from './components/ChangePassword';
 export {default as Logout} from './components/Logout';
 
-// eslint-disable-next-line
 export default {actions, actionTypes, reducer, selectors};

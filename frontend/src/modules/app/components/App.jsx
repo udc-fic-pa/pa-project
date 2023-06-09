@@ -15,7 +15,7 @@ const App = () => {
         dispatch(users.actions.tryLoginFromServiceToken(
             () => dispatch(users.actions.logout())));
     
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

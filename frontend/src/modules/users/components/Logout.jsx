@@ -12,7 +12,7 @@ const Logout = () => {
     useEffect(() => {
         dispatch(users.actions.logout());
         navigate('/');
-    });
+    }, []);
 
     return null;
 

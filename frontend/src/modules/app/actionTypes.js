@@ -1,1 +1,1 @@
-export const ERROR = 'project/common/error';
+export const ERROR = 'project/app/error';

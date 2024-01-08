@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 
-import {ErrorDialog, Loader} from '../../common';
+import {ErrorDialog} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
@@ -14,19 +14,10 @@ const ConnectedErrorDialog = () => {
 
 };
 
-const ConnectedLoader = () => {
-
-    const loading = useSelector(selectors.isLoading);
-
-    return <Loader loading={loading}/>
-
-};
-
 const AppGlobalComponents = () => (
 
     <div>
         <ConnectedErrorDialog/>
-        <ConnectedLoader/>
     </div>
 
 );

@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.3</version>
     </parent>
     
     <properties>
@@ -34,7 +34,7 @@
         <jjwt.version>0.11.5</jjwt.version>
         
         <!-- Plugin versions -->
-        <surefireMavenPlugin.version>3.1.0</surefireMavenPlugin.version>
+        <surefireMavenPlugin.version>3.2.5</surefireMavenPlugin.version>
         <sqlPlugin.version>1.5</sqlPlugin.version>
         
     </properties>
@@ -150,8 +150,8 @@
                    if such tables do not exist yet).
 
                  - Configuration specifies autocommit="true" since some drivers
-                   (e.g the PostgreSQL JDBC 2 driver) do not commit changes if
-                   some error ocurrs.
+                   (e.g. the PostgreSQL JDBC 2 driver) do not commit changes if
+                   some error occurs.
             -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

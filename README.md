@@ -4,7 +4,7 @@
 
 - Node 18.
 - Java 21 (tested with Eclipse Temurin).
-- Maven 3.8+.
+- Maven 3.9+.
 - MySQL 8.
 
 ## Database creation

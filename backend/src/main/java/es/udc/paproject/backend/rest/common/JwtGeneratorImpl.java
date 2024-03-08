@@ -41,7 +41,6 @@ public class JwtGeneratorImpl implements JwtGenerator {
 		
 		return new JwtInfo(
 			((Integer) claims.get("userId")).longValue(), 
-			claims.getSubject(), 
 			(String) claims.get("role"));
 		
 	}

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
@@ -25,8 +24,8 @@ public class JwtGeneratorImpl implements JwtGenerator {
 		return Jwts.builder()
 			.claim("userId", info.getUserId())
 			.claim("role", info.getRole())
-			.setExpiration(new Date(System.currentTimeMillis() + expirationMinutes*60*1000))
-			.signWith(Keys.hmacShaKeyFor(signKey.getBytes()), SignatureAlgorithm.HS256)
+			.expiration(new Date(System.currentTimeMillis() + expirationMinutes*60*1000))
+			.signWith(Keys.hmacShaKeyFor(signKey.getBytes()))
 			.compact();
 
 	}
@@ -34,11 +33,11 @@ public class JwtGeneratorImpl implements JwtGenerator {
 	@Override
 	public JwtInfo getInfo(String token) {
 		
-		Claims claims = Jwts.parserBuilder()
-	        .setSigningKey(signKey.getBytes())
+		Claims claims = Jwts.parser()
+			.verifyWith(Keys.hmacShaKeyFor(signKey.getBytes()))
 			.build()
-	        .parseClaimsJws(token)
-	        .getBody();
+	        .parseSignedClaims(token)
+			.getPayload();
 		
 		return new JwtInfo(
 			((Integer) claims.get("userId")).longValue(), 

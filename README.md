@@ -3,7 +3,7 @@
 ## Requirements
 
 - Node 18.
-- Java 17 (tested with Eclipse Temurin).
+- Java 21 (tested with Eclipse Temurin).
 - Maven 3.8+.
 - MySQL 8.
 

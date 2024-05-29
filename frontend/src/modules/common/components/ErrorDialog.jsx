@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {useIntl, FormattedMessage} from 'react-intl';
 
 import {NetworkError} from '../../../backend';
@@ -43,10 +42,5 @@ const ErrorDialog = ({error, onClose}) => {
     );
 
 };
-
-ErrorDialog.propTypes = {
-    error: PropTypes.object,
-    onClose: PropTypes.func.isRequired
-}
 
 export default ErrorDialog;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 const Pager = ({back, next}) => (
@@ -21,10 +20,5 @@ const Pager = ({back, next}) => (
     </nav>
 
 );
-
-Pager.propTypes = {
-    back: PropTypes.object.isRequired,
-    next: PropTypes.object.isRequired
-};
 
 export default Pager;

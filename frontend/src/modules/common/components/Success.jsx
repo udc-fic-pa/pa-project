@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const Success = ({message, onClose}) => message && (
     <div className="alert alert-success alert-dismissible fade show" role="alert">
         {message}
@@ -9,10 +7,5 @@ const Success = ({message, onClose}) => message && (
         </button>
     </div>
 );
-
-Success.propTypes = {
-    message: PropTypes.string,
-    onClose: PropTypes.func.isRequired
-};
 
 export default Success;

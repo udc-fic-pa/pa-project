@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl';
 
 const Errors = ({errors, onClose}) => {
@@ -49,10 +48,5 @@ const Errors = ({errors, onClose}) => {
     );
 
 }
-
-Errors.propTypes = {
-    errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    onClose: PropTypes.func.isRequired
-};
 
 export default Errors;

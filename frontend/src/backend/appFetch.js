@@ -45,7 +45,7 @@ const getOptions = (method, body) => {
     if (serviceToken) {
 
         if (options.headers) {
-            config.headers['Authorization'] = `Bearer ${serviceToken}`;
+            options.headers['Authorization'] = `Bearer ${serviceToken}`;
         } else {
             options.headers = {'Authorization': `Bearer ${serviceToken}`};
         }

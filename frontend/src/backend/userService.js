@@ -1,13 +1,14 @@
-import {config, appFetch, setServiceToken, getServiceToken, removeServiceToken, setReauthenticationCallback} from './appFetch';
+import {config, appFetch, appFetch2, setServiceToken, getServiceToken, removeServiceToken, setReauthenticationCallback} from './appFetch';
+// FIXME: when update to appFetch2 is completed, remove config and appFetch from import.
 
-export const login = (userName, password, onSuccess, onErrors, reauthenticationCallback) =>
-    appFetch('/users/login', config('POST', {userName, password}),
-        authenticatedUser => {
-            setServiceToken(authenticatedUser.serviceToken);
-            setReauthenticationCallback(reauthenticationCallback);
-            onSuccess(authenticatedUser);
-        }, 
-        onErrors);
+export const login = async (userName, password, reauthenticationCallback) => {
+    const response = await appFetch2('POST', '/users/login', {userName, password});
+    if (response.ok) {
+        setServiceToken(response.payload.serviceToken);
+        setReauthenticationCallback(reauthenticationCallback);
+    }
+    return response;
+}
 
 export const tryLoginFromServiceToken = (onSuccess, reauthenticationCallback) => {
 

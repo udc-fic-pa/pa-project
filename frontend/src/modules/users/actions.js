@@ -20,17 +20,6 @@ export const loginCompleted = authenticatedUser => ({
     authenticatedUser
 });
 
-export const tryLoginFromServiceToken = reauthenticationCallback => dispatch =>
-    backend.userService.tryLoginFromServiceToken(
-        authenticatedUser => {
-            if (authenticatedUser) {
-                dispatch(loginCompleted(authenticatedUser));
-            }
-        },
-        reauthenticationCallback
-    );
-    
-
 export const logout = () => {
 
     backend.userService.logout();

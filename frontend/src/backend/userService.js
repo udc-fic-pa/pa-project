@@ -10,21 +10,24 @@ export const login = async (userName, password, reauthenticationCallback) => {
     return response;
 }
 
-export const tryLoginFromServiceToken = (onSuccess, reauthenticationCallback) => {
+export const tryLoginFromServiceToken = async reauthenticationCallback => {
 
     const serviceToken = getServiceToken();
 
     if (!serviceToken) {
-        onSuccess();
-        return;
+        return {ok: false, payload: null};
     }
 
     setReauthenticationCallback(reauthenticationCallback);
 
-    appFetch('/users/loginFromServiceToken', config('POST'),
-        authenticatedUser => onSuccess(authenticatedUser),
-        () => removeServiceToken()
-    );
+    const response = await appFetch2('POST', '/users/loginFromServiceToken');
+
+    if (response.ok) {
+        return response;
+    } else {
+        removeServiceToken();
+        return {ok: false, payload: null};
+    }
 
 }
 

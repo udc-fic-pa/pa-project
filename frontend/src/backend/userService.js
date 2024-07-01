@@ -31,15 +31,13 @@ export const tryLoginFromServiceToken = async reauthenticationCallback => {
 
 }
 
-export const signUp = (user, onSuccess, onErrors, reauthenticationCallback) => {
-
-    appFetch('/users/signUp', config('POST', user), 
-        authenticatedUser => {
-            setServiceToken(authenticatedUser.serviceToken);
-            setReauthenticationCallback(reauthenticationCallback);
-            onSuccess(authenticatedUser);
-        }, 
-        onErrors);
+export const signUp = async (user, reauthenticationCallback) => {
+    const response = await appFetch2('POST', '/users/signUp', user);
+    if (response.ok) {
+        setServiceToken(response.payload.serviceToken);
+        setReauthenticationCallback(reauthenticationCallback);
+    }
+    return response;
 
 }
 

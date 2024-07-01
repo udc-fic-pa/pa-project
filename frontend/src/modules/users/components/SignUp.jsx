@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
+import backend from '../../../backend';
 
 const SignUp = () => {
 
@@ -21,26 +22,31 @@ const SignUp = () => {
     let form;
     let confirmPasswordInput;
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
 
         event.preventDefault();
 
         if (form.checkValidity() && checkConfirmPassword()) {
-            
-            dispatch(actions.signUp(
-                {userName: userName.trim(),
+
+            const user = {
+                userName: userName.trim(),
                 password: password,
                 firstName: firstName.trim(),
                 lastName: lastName.trim(),
-                email: email.trim()},
-                () => navigate('/'),
-                errors => setBackendErrors(errors),
-                () => {
-                    navigate('/users/login');
-                    dispatch(actions.logout());
-                }
-            ));
-            
+                email: email.trim()
+            };
+
+            const response = await backend.userService.signUp(user, () => {
+                navigate('/users/login');
+                dispatch(actions.logout());
+            });
+
+            if (response.ok) {
+                dispatch(actions.signUpCompleted(response.payload));
+                navigate('/');
+            } else {
+                setBackendErrors(response.payload);
+            }
 
         } else {
 

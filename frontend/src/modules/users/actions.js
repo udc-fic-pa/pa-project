@@ -22,15 +22,7 @@ export const logout = () => {
 export const updateProfileCompleted = user => ({
     type: actionTypes.UPDATE_PROFILE_COMPLETED,
     user
-})
-
-export const updateProfile = (user, onSuccess, onErrors) => dispatch =>
-    backend.userService.updateProfile(user, 
-        user => {
-            dispatch(updateProfileCompleted(user));
-            onSuccess();
-        },
-        onErrors);
+});
 
 export const changePassword = (id, oldPassword, newPassword, onSuccess, onErrors) => () =>
     backend.userService.changePassword(id, oldPassword, newPassword, onSuccess, onErrors);

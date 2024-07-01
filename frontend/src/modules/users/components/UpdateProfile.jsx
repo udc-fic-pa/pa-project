@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
+import backend from '../../../backend';
 
 const UpdateProfile = () => {
 
@@ -18,19 +19,27 @@ const UpdateProfile = () => {
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
 
         event.preventDefault();
 
         if (form.checkValidity()) {
-            
-            dispatch(actions.updateProfile(
-                {id: user.id,
+
+            const newUserProfile = {
+                id: user.id,
                 firstName: firstName.trim(),
                 lastName: lastName.trim(),
-                email: email.trim()},
-                () => navigate('/'),
-                errors => setBackendErrors(errors)));
+                email: email.trim()
+            };
+            
+            const response = await backend.userService.updateProfile(newUserProfile);
+
+            if (response.ok) {
+                dispatch(actions.updateProfileCompleted(response.payload));
+                navigate('/');
+            } else {
+                setBackendErrors(response.payload);
+            }
 
         } else {
 

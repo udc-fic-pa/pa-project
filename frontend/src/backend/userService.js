@@ -43,9 +43,8 @@ export const signUp = async (user, reauthenticationCallback) => {
 
 export const logout = () => removeServiceToken();
 
-export const updateProfile = (user, onSuccess, onErrors) =>
-    appFetch(`/users/${user.id}`, config('PUT', user),
-        onSuccess, onErrors);
+export const updateProfile = async user =>
+    await appFetch2('PUT', `/users/${user.id}`, user);
 
 export const changePassword = (id, oldPassword, newPassword, onSuccess,
     onErrors) =>

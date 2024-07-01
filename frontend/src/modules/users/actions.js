@@ -23,6 +23,3 @@ export const updateProfileCompleted = user => ({
     type: actionTypes.UPDATE_PROFILE_COMPLETED,
     user
 });
-
-export const changePassword = (id, oldPassword, newPassword, onSuccess, onErrors) => () =>
-    backend.userService.changePassword(id, oldPassword, newPassword, onSuccess, onErrors);

@@ -4,13 +4,12 @@ import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
-import * as actions from '../actions';
 import * as selectors from '../selectors';
+import backend from '../../../backend';
 
 const ChangePassword = () => {
 
     const user = useSelector(selectors.getUser);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -20,15 +19,20 @@ const ChangePassword = () => {
     let form;
     let confirmNewPasswordInput;
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
 
         event.preventDefault();
 
         if (form.checkValidity() && checkConfirmNewPassword()) {
 
-            dispatch(actions.changePassword(user.id, oldPassword, newPassword,
-                () => navigate('/'),
-                errors => setBackendErrors(errors)));
+            const response = await backend.userService.changePassword(user.id, oldPassword, newPassword);
+
+            if (response.ok) {
+                navigate('/');
+            } else {
+                setBackendErrors(response.payload);
+            }
+
 
         } else {
 

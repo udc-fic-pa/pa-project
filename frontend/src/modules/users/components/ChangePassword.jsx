@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router-dom';
 

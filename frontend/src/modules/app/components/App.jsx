@@ -27,7 +27,7 @@ const App = () => {
 
         tryLoginFromServiceToken();
     
-    }, [dispatch]);
+    }, [dispatch, navigate]);
 
     return (
         <div>

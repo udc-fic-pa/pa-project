@@ -6,6 +6,7 @@ import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
 import users from '../../users';
+import backend from '../../../backend';
 
 const App = () => {
 

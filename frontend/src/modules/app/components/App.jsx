@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
 
 import Header from './Header';
 import Body from './Body';
@@ -11,15 +10,12 @@ import backend from '../../../backend';
 const App = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
 
         const tryLoginFromServiceToken = async () => {
-            const response = await backend.userService.tryLoginFromServiceToken(() => {
-                navigate('/users/login');
-                dispatch(users.actions.logout());
-            });
+            const response = await backend.userService.tryLoginFromServiceToken(
+                () => dispatch(users.actions.logout()));
             if (response.ok) {
                 dispatch(users.actions.loginCompleted(response.payload));
             }
@@ -27,7 +23,7 @@ const App = () => {
 
         tryLoginFromServiceToken();
     
-    }, [dispatch, navigate]);
+    }, [dispatch]);
 
     return (
         <div>

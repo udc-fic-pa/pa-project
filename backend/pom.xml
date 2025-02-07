@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.3</version>
+        <version>3.3.8</version>
     </parent>
     
     <properties>
@@ -31,11 +31,11 @@
         <java.version>21</java.version>
         
         <!-- Package versions -->
-        <jjwt.version>0.12.5</jjwt.version>
+        <jjwt.version>0.12.6</jjwt.version>
         
         <!-- Plugin versions -->
-        <surefireMavenPlugin.version>3.2.5</surefireMavenPlugin.version>
-        <sqlPlugin.version>1.5</sqlPlugin.version>
+        <surefireMavenPlugin.version>3.5.2</surefireMavenPlugin.version>
+        <sqlPlugin.version>3.0.0</sqlPlugin.version>
         
     </properties>
     

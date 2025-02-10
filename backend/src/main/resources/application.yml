@@ -8,14 +8,8 @@ spring:
     url: @dataSource.url@
     username: @dataSource.user@
     password: @dataSource.password@
-    dbcp2:
-      max-total: 4
-      max-idle: 2
-      max-wait-millis: 10000
-      remove-abandoned-on-borrow: true
-      remove-abandoned-timeout: 60
-      log-abandoned: true
-      validation-query: SELECT 1
+    hikari:
+      maximum-pool-size: 4
   devtools:
     restart:
       trigger-file: reload

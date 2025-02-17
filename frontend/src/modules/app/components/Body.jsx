@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router';
 
 import AppGlobalComponents from './AppGlobalComponents';
 import Home from './Home';

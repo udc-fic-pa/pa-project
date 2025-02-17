@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 
 import {Errors} from '../../common';
 import * as selectors from '../selectors';

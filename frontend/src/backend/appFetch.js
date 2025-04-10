@@ -72,7 +72,7 @@ export const appFetch = async (method, path, body) => {
 
        return appFetchResponse;
 
-    } catch (error) {
+    } catch { 
         networkErrorCallback();
     }
 

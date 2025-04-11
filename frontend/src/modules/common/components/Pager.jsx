@@ -1,23 +1,16 @@
 import {FormattedMessage} from 'react-intl';
+import Pagination from 'react-bootstrap/Pagination';
 
 const Pager = ({back, next}) => (
 
-    <nav aria-label="page navigation">
-        <ul className="pagination justify-content-center">
-            <li className={`page-item ${back.enabled ? "": "disabled"}`}>
-                <button className="page-link"
-                    onClick={back.onClick}>
-                    <FormattedMessage id='project.global.buttons.back'/>
-                </button>
-            </li>
-            <li className={`page-item ${next.enabled ? "": "disabled"}`}>
-                <button className="page-link"
-                    onClick={next.onClick}>
-                    <FormattedMessage id='project.global.buttons.next'/>
-                </button>
-            </li>
-        </ul>
-    </nav>
+    <Pagination className="justify-content-center">
+        <Pagination.Prev disabled={!back.enabled} onClick={back.onClick}>
+            <FormattedMessage id='project.global.buttons.back'/>
+        </Pagination.Prev>
+        <Pagination.Next disabled={!next.enabled} onClick={next.onClick}>
+            <FormattedMessage id='project.global.buttons.next'/>
+        </Pagination.Next>
+    </Pagination>
 
 );
 

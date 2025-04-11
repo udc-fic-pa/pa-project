@@ -1,4 +1,5 @@
 import {useIntl} from 'react-intl';
+import Alert from 'react-bootstrap/Alert';
 
 const Errors = ({errors, onClose}) => {
 
@@ -24,7 +25,7 @@ const Errors = ({errors, onClose}) => {
 
     return (
 
-        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+        <Alert variant="danger" onClose={() => onClose()} dismissible>
 
             {globalError ? globalError : ''}
 
@@ -38,12 +39,7 @@ const Errors = ({errors, onClose}) => {
                 ''
             }
 
-            <button type="button" className="close" data-dismiss="alert" aria-label="Close" 
-                onClick={() => onClose()}>
-                <span aria-hidden="true">&times;</span>
-            </button>
-
-        </div>
+        </Alert>
 
     );
 

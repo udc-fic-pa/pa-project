@@ -2,6 +2,11 @@ import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -16,6 +21,7 @@ const UpdateProfile = () => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail]  = useState(user.email);
+    const [formValidated, setFormValidated] = useState(false);
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
@@ -44,75 +50,75 @@ const UpdateProfile = () => {
         } else {
 
             setBackendErrors(null);
-            form.classList.add('was-validated');
+            setFormValidated(true);
 
         }
 
     }
 
     return (
-        <div>
+        <div className="col-md-10 mx-auto">
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
-            <div className="card bg-light border-dark">
-                <h5 className="card-header">
+            <Card className="bg-light border-dark">
+                <Card.Header as="h5">
                     <FormattedMessage id="project.users.UpdateProfile.title"/>
-                </h5>
-                <div className="card-body">
-                    <form ref={node => form = node} 
-                        className="needs-validation" noValidate onSubmit={e => handleSubmit(e)}>
-                        <div className="form-group row">
-                            <label htmlFor="firstName" className="col-md-3 col-form-label">
+                </Card.Header>
+                <Card.Body>
+                    <Form ref={node => form = node}
+                        noValidate validated={formValidated} onSubmit={e => handleSubmit(e)}>
+                        <Form.Group as={Row} className="mb-3" controlId="firstName">
+                            <Form.Label column md={3}>
                                 <FormattedMessage id="project.global.fields.firstName"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="text" id="firstName" className="form-control"
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="text"
                                     value={firstName}
                                     onChange={e => setFirstName(e.target.value)}
                                     autoFocus
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="lastName" className="col-md-3 col-form-label">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="lastName">
+                            <Form.Label column md={3}>
                                 <FormattedMessage id="project.global.fields.lastName"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="text" id="lastName" className="form-control"
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="text"
                                     value={lastName}
                                     onChange={e => setLastName(e.target.value)}
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="email" className="col-md-3 col-form-label">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="email">
+                            <Form.Label column md={3}>
                                 <FormattedMessage id="project.global.fields.email"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="email" id="email" className="form-control"
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="email"
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.email'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <div className="offset-md-3 col-md-1">
-                                <button type="submit" className="btn btn-primary">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col md={{ span: 4, offset: 3 }}>
+                                <Button type="submit">
                                     <FormattedMessage id="project.global.buttons.save"/>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                                </Button>
+                            </Col>
+                        </Form.Group>
+                    </Form>
+                </Card.Body>
+            </Card>
         </div>
     );
 

@@ -3,6 +3,11 @@ import {useDispatch} from 'react-redux';
 import {Link} from 'react-router';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -15,6 +20,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [formValidated, setFormValidated] = useState(false);
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
@@ -39,66 +45,67 @@ const Login = () => {
 
         } else {
             setBackendErrors(null);
-            form.classList.add('was-validated');
+            setFormValidated(true);
         }
 
     }
 
     return (
-        <div>
+        <div className="col-md-10 mx-auto">
             <p className="text-center">
                 <Link to="/users/signup">
                     <FormattedMessage id="project.users.SignUp.title"/>
                 </Link>
             </p>
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
-            <div className="card bg-light border-dark">
-                <h5 className="card-header">
+            <Card className="bg-light border-dark">
+                <Card.Header as="h5">
                     <FormattedMessage id="project.users.Login.title"/>
-                </h5>
-                <div className="card-body">
-                    <form ref={node => form = node} 
-                        className="needs-validation" noValidate 
-                        onSubmit={e => handleSubmit(e)}>
-                        <div className="form-group row">
-                            <label htmlFor="userName" className="col-md-3 col-form-label">
+                </Card.Header>
+                <Card.Body>
+                    <Form ref={node => form = node}
+                          noValidate validated={formValidated} onSubmit={e => handleSubmit(e)}>
+                        <Form.Group as={Row} className="mb-3" controlId="userName">
+                            <Form.Label column md={3} >
                                 <FormattedMessage id="project.global.fields.userName"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="text" id="userName" className="form-control"
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="text"
                                     value={userName}
                                     onChange={e => setUserName(e.target.value)}
                                     autoFocus
+                                    autoComplete="username"
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="password" className="col-md-3 col-form-label">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="password">
+                            <Form.Label column md={3}>
                                 <FormattedMessage id="project.global.fields.password"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="password" id="password" className="form-control"
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="password"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
+                                    autoComplete="current-password"
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <div className="offset-md-3 col-md-1">
-                                <button type="submit" className="btn btn-primary">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col md={{ span: 4, offset: 3 }}>
+                                <Button type="submit">
                                     <FormattedMessage id="project.users.Login.title"/>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                                </Button>
+                            </Col>
+                        </Form.Group>
+                    </Form>
+                </Card.Body>
+            </Card>
         </div>
     );
 

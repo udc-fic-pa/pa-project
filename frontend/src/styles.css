@@ -1,7 +1,7 @@
-.navbar-collapse {
-    text-align: center;
+a:not([class]) {
+    text-decoration: none;
 }
 
-.form-group > label > span {
-    font-weight: bold;
+a:not([class]):hover {
+    text-decoration: underline;
 }

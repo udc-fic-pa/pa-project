@@ -5,8 +5,7 @@ import {BrowserRouter} from 'react-router';
 import {Provider} from 'react-redux';
 import {IntlProvider} from 'react-intl';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
 import '@fortawesome/fontawesome-free/css/solid.css';
 

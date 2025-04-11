@@ -1,16 +1,13 @@
 import {FormattedMessage} from 'react-intl';
+import Container from 'react-bootstrap/Container';
 
 const Footer = () => (
 
-    <div>
-        <br/>
-        <hr/>
-        <footer>
-            <p className="text-center">
-                <FormattedMessage id="project.app.Footer.text"/>
-            </p>
-        </footer>
-    </div>
+    <footer className="bg-light border-top text-center py-3 mt-auto">
+        <Container>
+            <FormattedMessage id="project.app.Footer.text"/>
+        </Container>
+    </footer>
 
 );
 

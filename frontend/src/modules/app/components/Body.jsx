@@ -1,5 +1,6 @@
 import {useSelector} from 'react-redux';
 import {Route, Routes} from 'react-router';
+import Container from 'react-bootstrap/Container';
 
 import AppGlobalComponents from './AppGlobalComponents';
 import Home from './Home';
@@ -12,8 +13,7 @@ const Body = () => {
     
    return (
 
-        <div className="container">
-            <br/>
+       <Container className="my-4 justify-content-center flex-grow-1">
             <AppGlobalComponents/>
             <Routes>
                 <Route path="/*" element={<Home/>}/>
@@ -23,7 +23,7 @@ const Body = () => {
                 {!loggedIn && <Route path="/users/login" element={<Login/>}/>}
                 {!loggedIn && <Route path="/users/signup" element={<SignUp/>}/>}
             </Routes>
-        </div>
+       </Container>
 
     );
 

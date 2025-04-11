@@ -2,6 +2,11 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import {Errors} from '../../common';
 import * as selectors from '../selectors';
@@ -14,10 +19,10 @@ const ChangePassword = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
+    const [formValidated, setFormValidated] = useState(false);
     const [backendErrors, setBackendErrors] = useState(null);
     const [passwordsDoNotMatch, setPasswordsDoNotMatch] = useState(false);
     let form;
-    let confirmNewPasswordInput;
 
     const handleSubmit = async event => {
 
@@ -37,7 +42,7 @@ const ChangePassword = () => {
         } else {
 
             setBackendErrors(null);
-            form.classList.add('was-validated');
+            setFormValidated(true);
             
         }
 
@@ -47,7 +52,6 @@ const ChangePassword = () => {
 
         if (newPassword !== confirmNewPassword) {
 
-            confirmNewPasswordInput.setCustomValidity('error');
             setPasswordsDoNotMatch(true);
 
             return false;
@@ -58,81 +62,83 @@ const ChangePassword = () => {
 
     }
 
-    const handleConfirmNewPasswordChange = event => {
+    const handleConfirmNewPasswordChange = value => {
 
-        confirmNewPasswordInput.setCustomValidity('');
-        setConfirmNewPassword(event.target.value);
+        setConfirmNewPassword(value);
         setPasswordsDoNotMatch(false);
 
     }
 
     return (
-        <div>
+        <div className="col-md-10 mx-auto">
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
-            <div className="card bg-light border-dark">
-                <h5 className="card-header">
+            <Card className="bg-light border-dark">
+                <Card.Header as="h5">
                     <FormattedMessage id="project.users.ChangePassword.title"/>
-                </h5>
-                <div className="card-body">
-                    <form ref={node => form = node} 
-                        className="needs-validation" noValidate onSubmit={e => handleSubmit(e)}>
-                        <div className="form-group row">
-                            <label htmlFor="oldPassword" className="col-md-3 col-form-label">
+                </Card.Header>
+                <Card.Body>
+                    <Form ref={node => form = node}
+                          noValidate validated={formValidated} onSubmit={e => handleSubmit(e)}>
+                        <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+                            <Form.Label column md={3}>
                                 <FormattedMessage id="project.users.ChangePassword.fields.oldPassword"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="password" id="oldPassword" className="form-control"
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="password"
                                     value={oldPassword}
                                     onChange={e => setOldPassword(e.target.value)}
                                     autoFocus
+                                    autoComplete="current-password"
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="newPassword" className="col-md-3 col-form-label">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="newPassword">
+                            <Form.Label column md={3}>
                                 <FormattedMessage id="project.users.ChangePassword.fields.newPassword"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="password" id="newPassword" className="form-control"
-                                    value={newPassword}
-                                    onChange={e => setNewPassword(e.target.value)}
-                                    required/>
-                                <div className="invalid-feedback">
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control type="password"
+                                              value={newPassword}
+                                              onChange={e => setNewPassword(e.target.value)}
+                                              autoComplete="new-password"
+                                              required/>
+                                <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="confirmNewPassword" className="col-md-3 col-form-label">
-                                <FormattedMessage id="project.users.ChangePassword.fields.confirmNewPassword"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input ref={node => confirmNewPasswordInput = node}
-                                    type="password" id="confirmNewPassword" className="form-control"
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="confirmNewPassword">
+                            <Form.Label column md={3}>
+                                <FormattedMessage id="project.users.SignUp.fields.confirmPassword"/>
+                            </Form.Label>
+                            <Col md={4}>
+                                <Form.Control
+                                    type="password"
                                     value={confirmNewPassword}
-                                    onChange={e => handleConfirmNewPasswordChange(e)}
+                                    onChange={e => handleConfirmNewPasswordChange(e.target.value)}
+                                    autoComplete="new-password"
+                                    isInvalid={passwordsDoNotMatch}
                                     required/>
-                                <div className="invalid-feedback">
+                                <Form.Control.Feedback type="invalid">
                                     {passwordsDoNotMatch ?
                                         <FormattedMessage id='project.global.validator.passwordsDoNotMatch'/> :
                                         <FormattedMessage id='project.global.validator.required'/>}
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <div className="offset-md-3 col-md-1">
-                                <button type="submit" className="btn btn-primary">
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col md={{ span: 4, offset: 3 }}>
+                                <Button type="submit">
                                     <FormattedMessage id="project.global.buttons.save"/>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                                </Button>
+                            </Col>
+                        </Form.Group>
+                    </Form>
+                </Card.Body>
+            </Card>
         </div>
     );
 

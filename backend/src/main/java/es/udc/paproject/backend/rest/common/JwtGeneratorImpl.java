@@ -5,44 +5,75 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jose.JWSAlgorithm;
+import com.nimbusds.jose.JWSHeader;
+import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 
 @Component
 public class JwtGeneratorImpl implements JwtGenerator {
-	
+
 	@Value("${project.jwt.signKey}")
 	private String signKey;
-	
+
 	@Value("${project.jwt.expirationMinutes}")
 	private long expirationMinutes;
 
 	@Override
 	public String generate(JwtInfo info) {
 
-		return Jwts.builder()
-			.claim("userId", info.getUserId())
-			.claim("role", info.getRole())
-			.expiration(new Date(System.currentTimeMillis() + expirationMinutes*60*1000))
-			.signWith(Keys.hmacShaKeyFor(signKey.getBytes()))
-			.compact();
+		try {
+
+			JWTClaimsSet claims = new JWTClaimsSet.Builder()
+				.claim("userId", info.getUserId())
+				.claim("role", info.getRole())
+				.expirationTime(new Date(System.currentTimeMillis() + expirationMinutes * 60 * 1000))
+				.build();
+
+			SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claims);
+
+			signedJWT.sign(new MACSigner(signKey));
+
+			return signedJWT.serialize();
+
+		} catch (JOSEException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 
 	@Override
 	public JwtInfo getInfo(String token) {
-		
-		Claims claims = Jwts.parser()
-			.verifyWith(Keys.hmacShaKeyFor(signKey.getBytes()))
-			.build()
-	        .parseSignedClaims(token)
-			.getPayload();
-		
-		return new JwtInfo(
-			((Integer) claims.get("userId")).longValue(), 
-			(String) claims.get("role"));
-		
+
+		try {
+
+			// Verify signature.
+			SignedJWT signedJWT = SignedJWT.parse(token);
+
+			if (!signedJWT.verify(new MACVerifier(signKey))) {
+				throw new RuntimeException("Invalid JWT signature");
+			}
+
+			JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
+
+			// Verify expiration date.
+			if (claims.getExpirationTime() == null ||
+					claims.getExpirationTime().before(new Date())) {
+				throw new RuntimeException("JWT token expired");
+			}
+
+			return new JwtInfo(
+				((Number) claims.getClaim("userId")).longValue(),
+				(String) claims.getClaim("role"));
+
+		} catch (java.text.ParseException | JOSEException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }
+

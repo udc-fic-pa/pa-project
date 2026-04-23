@@ -34,7 +34,7 @@
         <jjwt.version>0.12.6</jjwt.version>
         
         <!-- Plugin versions -->
-        <surefireMavenPlugin.version>3.5.2</surefireMavenPlugin.version>
+        <surefireMavenPlugin.version>3.5.5</surefireMavenPlugin.version>
         <sqlPlugin.version>3.0.0</sqlPlugin.version>
         
     </properties>

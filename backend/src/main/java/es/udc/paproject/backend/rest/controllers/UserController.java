@@ -63,7 +63,7 @@ public class UserController {
 		String errorMessage = messageSource.getMessage(INCORRECT_LOGIN_EXCEPTION_CODE, null,
 				INCORRECT_LOGIN_EXCEPTION_CODE, locale);
 
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
 	
@@ -75,7 +75,7 @@ public class UserController {
 		String errorMessage = messageSource.getMessage(INCORRECT_PASSWORD_EXCEPTION_CODE, null,
 				INCORRECT_PASSWORD_EXCEPTION_CODE, locale);
 
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
 
@@ -99,7 +99,7 @@ public class UserController {
 	public AuthenticatedUserDto login(@Validated @RequestBody LoginParamsDto params)
 		throws IncorrectLoginException {
 		
-		User user = userService.login(params.getUserName(), params.getPassword());
+		User user = userService.login(params.userName(), params.password());
 			
 		return toAuthenticatedUserDto(generateServiceToken(user), user);
 		
@@ -124,8 +124,8 @@ public class UserController {
 			throw new PermissionException();
 		}
 		
-		return toUserDto(userService.updateProfile(id, userDto.getFirstName(), userDto.getLastName(),
-			userDto.getEmail()));
+		return toUserDto(userService.updateProfile(id, userDto.firstName(), userDto.lastName(),
+			userDto.email()));
 		
 	}
 	
@@ -139,7 +139,7 @@ public class UserController {
 			throw new PermissionException();
 		}
 		
-		userService.changePassword(id, params.getOldPassword(), params.getNewPassword());
+		userService.changePassword(id, params.oldPassword(), params.newPassword());
 		
 	}
 	

@@ -1,36 +1,14 @@
 package es.udc.paproject.backend.rest.common;
 
 import java.util.List;
+public record ErrorsDto(String globalError, List<FieldErrorDto> fieldErrors) {
 
-public class ErrorsDto {
-	
-	private String globalError;
-	private List<FieldErrorDto> fieldErrors;
-	
-	public ErrorsDto(String globalError) {
-		this.globalError = globalError;
-	}
-	
-	public ErrorsDto(List<FieldErrorDto> fieldErrors) {
-
-		this.fieldErrors = fieldErrors;
-		
+	public static ErrorsDto ofGlobalError(String globalError) {
+		return new ErrorsDto(globalError, null);
 	}
 
-	public String getGlobalError() {
-		return globalError;
-	}
-
-	public void setGlobalError(String globalError) {
-		this.globalError = globalError;
-	}
-
-	public List<FieldErrorDto> getFieldErrors() {
-		return fieldErrors;
-	}
-
-	public void setFieldErrors(List<FieldErrorDto> fieldErrors) {
-		this.fieldErrors = fieldErrors;
+	public static ErrorsDto ofFieldErrors(List<FieldErrorDto> fieldErrors) {
+		return new ErrorsDto(null, fieldErrors);
 	}
 
 }

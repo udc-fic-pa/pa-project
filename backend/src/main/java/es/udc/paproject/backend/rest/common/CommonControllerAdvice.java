@@ -35,7 +35,7 @@ public class CommonControllerAdvice {
 		List<FieldErrorDto> fieldErrors = exception.getBindingResult().getFieldErrors().stream()
 			.map(error -> new FieldErrorDto(error.getField(), error.getDefaultMessage())).collect(Collectors.toList());
 		
-		return new ErrorsDto(fieldErrors);
+		return ErrorsDto.ofFieldErrors(fieldErrors);
 	    
 	}
 	
@@ -48,7 +48,7 @@ public class CommonControllerAdvice {
 		String errorMessage = messageSource.getMessage(INSTANCE_NOT_FOUND_EXCEPTION_CODE, 
 				new Object[] {nameMessage, exception.getKey().toString()}, INSTANCE_NOT_FOUND_EXCEPTION_CODE, locale);
 
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
 	
@@ -61,7 +61,7 @@ public class CommonControllerAdvice {
 		String errorMessage = messageSource.getMessage(DUPLICATE_INSTANCE_EXCEPTION_CODE, 
 				new Object[] {nameMessage, exception.getKey().toString()}, DUPLICATE_INSTANCE_EXCEPTION_CODE, locale);
 
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
 	
@@ -73,7 +73,7 @@ public class CommonControllerAdvice {
 		String errorMessage = messageSource.getMessage(PERMISSION_EXCEPTION_CODE, null, PERMISSION_EXCEPTION_CODE,
 			locale);
 
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
 

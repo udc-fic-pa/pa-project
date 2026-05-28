@@ -43,9 +43,9 @@ public class JwtFilter extends HttpFilter {
 			JwtInfo jwtInfo = jwtGenerator.getInfo(serviceToken);
 			
 			request.setAttribute("serviceToken", serviceToken);
-			request.setAttribute("userId", jwtInfo.getUserId());
+			request.setAttribute("userId", jwtInfo.userId());
 			
-			configureSecurityContext(jwtInfo.getRole());
+			configureSecurityContext(jwtInfo.role());
 			
 		} catch (Exception e) {
 			 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

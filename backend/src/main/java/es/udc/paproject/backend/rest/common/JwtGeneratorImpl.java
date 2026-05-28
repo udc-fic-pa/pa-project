@@ -28,8 +28,8 @@ public class JwtGeneratorImpl implements JwtGenerator {
 		try {
 
 			JWTClaimsSet claims = new JWTClaimsSet.Builder()
-				.claim("userId", info.getUserId())
-				.claim("role", info.getRole())
+				.claim("userId", info.userId())
+				.claim("role", info.role())
 				.expirationTime(new Date(System.currentTimeMillis() + expirationMinutes * 60 * 1000))
 				.build();
 
